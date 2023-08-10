@@ -32,6 +32,9 @@ const Category = sequelize.define('category', {
     },
     description: {
         type: DataTypes.STRING(500)
+    },
+    image: {
+        type: DataTypes.STRING(500)
     }
 })
 
@@ -50,14 +53,13 @@ const Advertisement = sequelize.define('advertisement', {
     image: {
         type: DataTypes.STRING,
         unique: true
-    }
+    },
 })
 
-
-Advertisement.hasOne(User)
-Advertisement.hasOne(Category)
-User.belongsTo(Advertisement)
-Category.belongsTo(Advertisement)
+Advertisement.belongsTo(User)
+Advertisement.belongsTo(Category)
+User.hasOne(Advertisement)
+Category.hasOne(Advertisement)
 
 
 module.exports = { User, Category, Advertisement }
