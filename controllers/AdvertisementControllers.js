@@ -34,7 +34,6 @@ const AdvertisementController = {
     },
 
     async createAd(req, res) {
-
         const name = req.body.name
         if (name.length < 2) { return res.status(400).json({ message: "название меньше 2-x символов" }) }
 
@@ -50,18 +49,16 @@ const AdvertisementController = {
         if (!image) { return res.status(400).json({ message: "фотографии не выбраны" }) }
 
         const token = req.headers.authorization
-        console.log(token);
 
         if (!token) {
-            return req.status(401).json({ message: "пользователь не авторизован" })
+            return req.status(401).json({ message: "пользователь не авторизован мавпкупук" })
         }
 
         if (token) {
-
-            const replaceToken = token.replace('Bearer ', '')
+            const replaceToken = token.split(' ')[1]
             try {
-                const jwtData = replaceToken.verify(token, 'fqugwqgfuiewfgefugieho')
-                console.log(jwtData, 5487543845385486, replaceToken);
+                const jwtData = jwt.verify(replaceToken, 'fqugwqgfuiewfgefugieho')
+                console.log(jwtData, 333333333);
                 try {
                     const advertisement = await Advertisement.create({
                         name: name,
