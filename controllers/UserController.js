@@ -158,6 +158,7 @@ const UserController = {
       return res.status(401).json({ message: 'вы не авторизованы' })
     }
   },
+  
   async checkAuth(req, res) {
     const token = req.headers?.authorization
     if (!token) { return res.status(401).json({ message: 'unauthorized' }) }
@@ -171,8 +172,6 @@ const UserController = {
     } catch (error) {
       return res.status(401).json({ message: 'unauthorized' })
     }
-
-
   }
 };
 
